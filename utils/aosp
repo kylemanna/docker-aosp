@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Simple AOSP wrapper to run commands in an AOSP docker container
+#
+# Author: Kyle Manna <kyle@kylemanna.com>
+#
+
+set -e
+
+# Override from environment
+AOSP_IMAGE=${AOSP_IMAGE:-kylemanna/aosp}
+AOSP_VOL=${AOSP_VOL:-/vol0}
+AOSP_ARGS=${AOSP_ARGS:---rm -it}
+
+sudo bash -c "mkdir -p $AOSP_VOL/{aosp,ccache} && chmod 777 $AOSP_VOL/{aosp,ccache}"
+
+[ -n "$SSH_AUTH_SOCK" ] && SSH_AUTH_ARGS="-v $SSH_AUTH_SOCK:/tmp/ssh_auth -e SSH_AUTH_SOCK=/tmp/ssh_auth"
+
+docker run $AOSP_ARGS $SSH_AUTH_ARGS \
+    -v "$AOSP_VOL/aosp:/aosp" -v "$AOSP_VOL/ccache:/tmp/ccache" \
+    $AOSP_IMAGE $@
