@@ -19,6 +19,7 @@ RUN chmod 755 /usr/local/bin/*
 
 # All builds will be done by user aosp
 RUN useradd --create-home aosp
+ADD gitconfig /home/aosp/.gitconfig
 
 # The persistent data will be in these two directories, everything else is
 # considered to be ephemeral
