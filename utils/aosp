@@ -14,7 +14,7 @@ AOSP_ARGS=${AOSP_ARGS:---rm -it}
 AOSP_VOL_AOSP=${AOSP_VOL_AOSP:-$AOSP_VOL/aosp}
 AOSP_VOL_CCACHE=${AOSP_VOL_CCACHE:-$AOSP_VOL/ccache}
 
-if [ ! -d "$AOSP_VOL/aosp" -o ! -d "$AOSP_VOL/aosp" ]; then
+if [ ! -d "$AOSP_VOL_AOSP" -o ! -d "$AOSP_VOL_CCACHE" ]; then
     sudo mkdir -p $AOSP_VOL_AOSP $AOSP_VOL_CCACHE
     sudo chmod 777 $AOSP_VOL_AOSP $AOSP_VOL_CCACHE
 fi
