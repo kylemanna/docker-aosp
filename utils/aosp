@@ -11,11 +11,18 @@ set -e
 AOSP_IMAGE=${AOSP_IMAGE:-kylemanna/aosp}
 AOSP_VOL=${AOSP_VOL:-/vol0}
 AOSP_ARGS=${AOSP_ARGS:---rm -it}
+AOSP_VOL_AOSP=${AOSP_VOL_AOSP:-$AOSP_VOL/aosp}
+AOSP_VOL_CCACHE=${AOSP_VOL_CCACHE:-$AOSP_VOL/ccache}
 
-sudo bash -c "mkdir -p $AOSP_VOL/{aosp,ccache} && chmod 777 $AOSP_VOL/{aosp,ccache}"
+if [ ! -d "$AOSP_VOL/aosp" -o ! -d "$AOSP_VOL/aosp" ]; then
+    sudo mkdir -p $AOSP_VOL_AOSP $AOSP_VOL_CCACHE
+    sudo chmod 777 $AOSP_VOL_AOSP $AOSP_VOL_CCACHE
+fi
 
-[ -n "$SSH_AUTH_SOCK" ] && SSH_AUTH_ARGS="-v $SSH_AUTH_SOCK:/tmp/ssh_auth -e SSH_AUTH_SOCK=/tmp/ssh_auth"
+if [ -n "$SSH_AUTH_SOCK" ]; then
+    SSH_AUTH_ARGS="-v $SSH_AUTH_SOCK:/tmp/ssh_auth -e SSH_AUTH_SOCK=/tmp/ssh_auth"
+fi
 
 docker run $AOSP_ARGS $SSH_AUTH_ARGS $AOSP_EXTRA_ARGS \
-    -v "$AOSP_VOL/aosp:/aosp" -v "$AOSP_VOL/ccache:/tmp/ccache" \
+    -v "$AOSP_VOL_AOSP:/aosp" -v "$AOSP_VOL_CCACHE:/tmp/ccache" \
     $AOSP_IMAGE $@
