@@ -16,6 +16,6 @@ sudo bash -c "mkdir -p $AOSP_VOL/{aosp,ccache} && chmod 777 $AOSP_VOL/{aosp,ccac
 
 [ -n "$SSH_AUTH_SOCK" ] && SSH_AUTH_ARGS="-v $SSH_AUTH_SOCK:/tmp/ssh_auth -e SSH_AUTH_SOCK=/tmp/ssh_auth"
 
-docker run $AOSP_ARGS $SSH_AUTH_ARGS \
+docker run $AOSP_ARGS $SSH_AUTH_ARGS $AOSP_EXTRA_ARGS \
     -v "$AOSP_VOL/aosp:/aosp" -v "$AOSP_VOL/ccache:/tmp/ccache" \
     $AOSP_IMAGE $@
