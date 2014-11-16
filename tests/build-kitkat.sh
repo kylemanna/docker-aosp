@@ -2,6 +2,10 @@
 #
 # Test script file that maps itself into a docker container and runs
 #
+# Example invocation:
+#
+# $ AOSP_VOL=$PWD/build ./build-kitkat.sh
+#
 set -ex
 
 if [ "$1" = "docker" ]; then
