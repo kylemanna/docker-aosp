@@ -36,7 +36,7 @@ VOLUME /aosp
 
 # Improve rebuild performance by enabling compiler cache
 ENV USE_CCACHE 1
-ENV CCACHE /tmp/ccache
+ENV CCACHE_DIR /tmp/ccache
 
 # Work in the build directory, repo is expected to be init'd here
 USER aosp
