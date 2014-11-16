@@ -13,6 +13,16 @@ Docker image and environment. This eliminate most surprises in breakages by
 by empowering developers and production builds to use the exact same
 environment.  The hope is that breakages will be caught earlier by the devs.
 
+This only works (well) on Linux.  Running this via `boot2docker` will result in
+a very painful performacne hit due to VirtualBox's `vboxsf` shared folder
+service which works terrible for **very** large builds like AOSP.  It might
+work, but consider youself warned.  If you're aware of another way to get
+around this, send a pull request!
+
+For *Mac OS X* and *Windows* users, consider
+[kylemanna/vagrant-aosp](https://github.com/kylemanna/vagrant-aosp) as a good
+virtual machine to enable development.
+
 
 Quickstart
 ----------
