@@ -9,7 +9,7 @@ if [ "$1" = "docker" ]; then
     cpus=$(grep ^processor /proc/cpuinfo | wc -l)
 
     repo init -u https://android.googlesource.com/platform/manifest -b $branch
-    repo sync -j $(($cpus * 2))
+    repo sync -j $cpus
 
     prebuilts/misc/linux-x86/ccache/ccache -M 10G
 
