@@ -1,0 +1,4 @@
+# Somewhat insecure, fork and override as needed.
+Host *
+	#IdentityFile /root/.ssh/id_rsa
+	StrictHostKeyChecking no
