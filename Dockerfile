@@ -32,8 +32,7 @@ RUN chown aosp:aosp /home/aosp/.gitconfig
 
 # The persistent data will be in these two directories, everything else is
 # considered to be ephemeral
-VOLUME /tmp/ccache
-VOLUME /aosp
+VOLUME ["/tmp/ccache", "/aosp"]
 
 # Improve rebuild performance by enabling compiler cache
 ENV USE_CCACHE 1
