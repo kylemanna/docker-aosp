@@ -9,11 +9,15 @@
 set -ex
 
 if [ "$1" = "docker" ]; then
-    branch=android-4.4.4_r2.0.1
+    TEST_BRANCH=${TEST_BRANCH:-android-4.4.4_r2.0.1}
+    TEST_URL=${TEST_URL:-https://android.googlesource.com/platform/manifest}
+
     cpus=$(grep ^processor /proc/cpuinfo | wc -l)
 
-    repo init -u https://android.googlesource.com/platform/manifest -b $branch
-    repo sync -j $cpus
+    repo init --depth 1 -u "$TEST_URL" -b "$TEST_BRANCH"
+
+    # Use default sync '-j' value embedded in manifest file to be polite
+    repo sync
 
     prebuilts/misc/linux-x86/ccache/ccache -M 10G
 
