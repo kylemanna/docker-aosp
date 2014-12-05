@@ -13,7 +13,7 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
 
 # Keep the dependency list as short as reasonable
 RUN apt-get update && \
-    apt-get install -y bison bsdmainutils build-essential curl \
+    apt-get install -y bc bison bsdmainutils build-essential curl \
         flex g++-multilib gcc-multilib git gnupg gperf lib32ncurses5-dev \
         lib32readline-gplv2-dev lib32z1-dev libesd0-dev libncurses5-dev \
         libsdl1.2-dev libwxgtk2.8-dev libxml2-utils lzop \
