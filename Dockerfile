@@ -11,6 +11,11 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886 && \
     echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
 
+# /bin/sh points to Dash by default, reconfigure to use bash until Android
+# build becomes POSIX compliant
+RUN echo "dash dash/sh boolean false" | debconf-set-selections && \
+    dpkg-reconfigure -p critical dash
+
 # Keep the dependency list as short as reasonable
 RUN apt-get update && \
     apt-get install -y bc bison bsdmainutils build-essential curl \
