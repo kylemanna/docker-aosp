@@ -25,7 +25,7 @@ else
     args="run.sh docker"
     export AOSP_EXTRA_ARGS="-v $(cd $(dirname $0) && pwd -P)/$(basename $0):/usr/local/bin/run.sh:ro"
     export AOSP_VOL=/vol1
-    export AOSP_IMAGE=aosp
+    export AOSP_IMAGE="kylemanna/aosp:4.4-kitkat"
 
     [ -n "$TEST_URL" ] && AOSP_EXTRA_ARGS+=" -e TEST_URL=$TEST_URL"
     [ -n "$TEST_BRANCH" ] && AOSP_EXTRA_ARGS+=" -e TEST_BRANCH=$TEST_BRANCHcY"

@@ -28,6 +28,7 @@ else
     aosp_url="https://raw.githubusercontent.com/kylemanna/docker-aosp/master/utils/aosp"
     args="run.sh docker"
     export AOSP_EXTRA_ARGS="-v $(cd $(dirname $0) && pwd -P)/$(basename $0):/usr/local/bin/run.sh:ro"
+    export AOSP_IMAGE="kylemanna/aosp:4.4-kitkat"
 
     #
     # Try to invoke the aosp wrapper with the following priority:
