@@ -26,7 +26,7 @@ if [ "$1" = "docker" ]; then
     make -j $cpus
 else
     aosp_url="https://raw.githubusercontent.com/kylemanna/docker-aosp/master/utils/aosp"
-    args="run.sh docker"
+    args="bash run.sh docker"
     export AOSP_EXTRA_ARGS="-v $(cd $(dirname $0) && pwd -P)/$(basename $0):/usr/local/bin/run.sh:ro"
     export AOSP_IMAGE="kylemanna/aosp:4.4-kitkat"
 
