@@ -40,3 +40,6 @@ ENV CCACHE_DIR /tmp/ccache
 # Work in the build directory, repo is expected to be init'd here
 USER aosp
 WORKDIR /aosp
+
+#Relogin to set env var such as USER
+CMD sudo -i -u aosp
