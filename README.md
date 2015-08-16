@@ -4,24 +4,20 @@ Android Open Source Project Docker Build Environment
 Minimal build environment for AOSP with handy automation wrapper scripts.
 
 Developers can use the Docker image to build directly while running the
-distribution of choice, without having to worry about breaking the AOSP build
-due to package updates as is sometimes common on rolling distributions like
-Arch Linux.
+distribution of choice, without having to worry about breaking the delicate
+AOSP build due to package updates as is sometimes common on bleeding edge
+rolling distributions like Arch Linux.
 
 Production build servers and integration test servers should also use the same
-Docker image and environment. This eliminate most surprises in breakages by
+Docker image and environment. This eliminates most surprise breakages by
 by empowering developers and production builds to use the exact same
-environment.  The hope is that breakages will be caught earlier by the devs.
+environment.  The devs will catch the issues with build environment first.
 
-This only works (well) on Linux.  Running this via `boot2docker` will result in
-a very painful performacne hit due to VirtualBox's `vboxsf` shared folder
-service which works terrible for **very** large builds like AOSP.  It might
-work, but consider youself warned.  If you're aware of another way to get
-around this, send a pull request!
-
-For *Mac OS X* and *Windows* users, consider
-[kylemanna/vagrant-aosp](https://github.com/kylemanna/vagrant-aosp) as a good
-virtual machine to enable development.
+This works well on Linux.  Running this via `boot2docker` (and friends) will
+result in a very painful performacne hit due to VirtualBox's `vboxsf` shared
+folder service which works terrible for **very** large file shares like AOSP.
+It might work, but consider yourself warned.  If you're aware of another way to
+get around this, send a pull request!
 
 
 Quickstart
