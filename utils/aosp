@@ -8,11 +8,16 @@
 set -e
 
 # Override from environment
+
 AOSP_IMAGE=${AOSP_IMAGE:-kylemanna/aosp}
-AOSP_VOL=${AOSP_VOL:-/vol0}
 AOSP_ARGS=${AOSP_ARGS:---rm -it}
+
+AOSP_VOL=${AOSP_VOL:-/vol0}
+AOSP_VOL=${AOSP_VOL%/} # Trim trailing slash if needed
 AOSP_VOL_AOSP=${AOSP_VOL_AOSP:-$AOSP_VOL/aosp}
+AOSP_VOL_AOSP=${AOSP_VOL_AOSP%/} # Trim trailing slash if needed
 AOSP_VOL_CCACHE=${AOSP_VOL_CCACHE:-$AOSP_VOL/ccache}
+AOSP_VOL_CCACHE=${AOSP_VOL_CCACHE%/} # Trim trailing slash if needed
 
 if [ ! -d "$AOSP_VOL_AOSP" -o ! -d "$AOSP_VOL_CCACHE" ]; then
     sudo mkdir -p $AOSP_VOL_AOSP $AOSP_VOL_CCACHE
