@@ -27,7 +27,8 @@ RUN chmod 755 /usr/local/bin/*
 RUN groupadd -r aosp && useradd --create-home -g aosp aosp
 COPY gitconfig /home/aosp/.gitconfig
 COPY ssh_config /home/aosp/.ssh/config
-RUN chown aosp:aosp /home/aosp/.gitconfig
+RUN chown aosp:aosp /home/aosp/.gitconfig && \
+  chown aosp:aosp -R /home/aosp/.ssh
 
 # The persistent data will be in these two directories, everything else is
 # considered to be ephemeral
