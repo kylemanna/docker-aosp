@@ -24,7 +24,7 @@ ADD https://commondatastorage.googleapis.com/git-repo-downloads/repo /usr/local/
 RUN chmod 755 /usr/local/bin/*
 
 # All builds will be done by user aosp
-RUN useradd --create-home aosp
+RUN groupadd -r aosp && useradd --create-home -g aosp aosp
 ADD gitconfig /home/aosp/.gitconfig
 ADD ssh_config /home/aosp/.ssh/config
 RUN chown aosp:aosp /home/aosp/.gitconfig
