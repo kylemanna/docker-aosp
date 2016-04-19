@@ -30,6 +30,9 @@ COPY ssh_config /home/aosp/.ssh/config
 RUN chown aosp:aosp /home/aosp/.gitconfig && \
   chown aosp:aosp -R /home/aosp/.ssh
 
+RUN mkdir -p /tmp/ccache /aosp && \
+  chown aosp:aosp /tmp/ccache /aosp
+
 # The persistent data will be in these two directories, everything else is
 # considered to be ephemeral
 VOLUME ["/tmp/ccache", "/aosp"]
