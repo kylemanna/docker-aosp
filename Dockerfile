@@ -43,14 +43,8 @@ RUN curl -O http://mirrors.kernel.org/ubuntu/pool/universe/o/openjdk-8/openjdk-8
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # All builds will be done by user aosp
-RUN groupadd -r aosp && useradd --create-home -g aosp aosp
-COPY gitconfig /home/aosp/.gitconfig
-COPY ssh_config /home/aosp/.ssh/config
-RUN chown aosp:aosp /home/aosp/.gitconfig && \
-  chown aosp:aosp -R /home/aosp/.ssh
-
-RUN mkdir -p /tmp/ccache /aosp && \
-  chown aosp:aosp /tmp/ccache /aosp
+COPY gitconfig /root/.gitconfig
+COPY ssh_config /root/.ssh/config
 
 # The persistent data will be in these two directories, everything else is
 # considered to be ephemeral
@@ -61,5 +55,7 @@ ENV USE_CCACHE 1
 ENV CCACHE_DIR /tmp/ccache
 
 # Work in the build directory, repo is expected to be init'd here
-USER aosp
 WORKDIR /aosp
+
+COPY utils/docker_entrypoint.sh /root/docker_entrypoint.sh
+ENTRYPOINT ["/root/docker_entrypoint.sh"]
