@@ -37,7 +37,12 @@ echo "$msg - done"
 
 echo ""
 
+# Default to 'bash' if no arguments are provided
+args="$@"
+if [ -z "$args" ]; then
+  args="bash"
+fi
 
 # Execute command as `aosp` user
 export HOME=/home/aosp
-exec sudo -u aosp "$@"
+exec sudo -u aosp $args
