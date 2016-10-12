@@ -30,7 +30,7 @@ cp /root/.ssh/config /home/aosp/.ssh/config && \
 chown aosp:aosp -R /home/aosp/.ssh &&
 echo "$msg - done"
 
-msg="docker_entrypoint: Creating /tmp/ccache and /asop directory" && echo $msg
+msg="docker_entrypoint: Creating /tmp/ccache and /aosp directory" && echo $msg
 mkdir -p /tmp/ccache /aosp
 chown aosp:aosp /tmp/ccache /aosp
 echo "$msg - done"
