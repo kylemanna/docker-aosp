@@ -45,11 +45,12 @@ For the terribly impatient.
        initializes the repo, fetches all source code, and builds.
     5. In parallel you are expected to be drinking because I save you some time.
 
+           mkdir nougat ; cd nougat
+           export AOSP_VOL=$PWD
+           curl -O https://raw.githubusercontent.com/kylemanna/docker-aosp/master/tests/build-nougat.sh
+           bash ./build-nougat.sh
 
-    mkdir kitkat ; cd kitkat
-    export AOSP_VOL=$PWD
-    curl -O https://raw.githubusercontent.com/kylemanna/docker-aosp/master/tests/build-kitkat.sh
-    bash ./build-kitkat.sh
+    This takes about 2 hours to download and build on i5-2500k with 100Mb/s network connection.
 
 How it Works
 ------------
@@ -70,7 +71,7 @@ Docker container.  For example to run `repo sync` in the Docker container:
 
 The `aosp` wrapper doesn't work well with setting up environments, but with
 some bash magic, this can be side stepped with short little scripts.  See
-`tests/build-kitkat.sh` for an example of a complete fetch and build of AOSP.
+`tests/build-nougat.sh` for an example of a complete fetch and build of AOSP.
 
 
 Tested
@@ -79,3 +80,4 @@ Tested
 * Android Kitkat `android-4.4.4_r2.0.1`
 * Android Lollipop `android-5.0.2_r1`
 * Android Marshmallow `android-6.0.1_r72`
+* Android Nougat `android-7.0.0_r14`
