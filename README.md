@@ -77,3 +77,5 @@ Tested
 ------
 
 * Android Kitkat `android-4.4.4_r2.0.1`
+* Android Lollipop `android-5.0.2_r1`
+* Android Marshmallow `android-6.0.1_r72`
