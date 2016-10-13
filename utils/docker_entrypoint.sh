@@ -45,4 +45,4 @@ fi
 
 # Execute command as `aosp` user
 export HOME=/home/aosp
-exec sudo -u aosp $args
+exec sudo -E -u aosp $args
