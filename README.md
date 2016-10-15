@@ -44,10 +44,10 @@ For the terribly impatient.
        initializes the repo, fetches all source code, and builds.
     5. In parallel you are expected to be drinking because I save you some time.
 
-           mkdir nougat ; cd nougat
-           export AOSP_VOL=$PWD
-           curl -O https://raw.githubusercontent.com/kylemanna/docker-aosp/master/tests/build-nougat.sh
-           bash ./build-nougat.sh
+            mkdir nougat ; cd nougat
+            export AOSP_VOL=$PWD
+            curl -O https://raw.githubusercontent.com/kylemanna/docker-aosp/master/tests/build-nougat.sh
+            bash ./build-nougat.sh
 
     This takes about 2 hours to download and build on i5-2500k with 100Mb/s network connection.
 
