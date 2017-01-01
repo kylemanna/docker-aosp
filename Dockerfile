@@ -17,7 +17,7 @@ RUN apt-get update && \
         lib32z1-dev libesd0-dev libncurses5-dev \
         libsdl1.2-dev libwxgtk3.0-dev libxml2-utils lzop sudo \
         openjdk-8-jdk \
-        pngcrush schedtool xsltproc zip zlib1g-dev && \
+        pngcrush schedtool xsltproc zip zlib1g-dev graphviz && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD https://commondatastorage.googleapis.com/git-repo-downloads/repo /usr/local/bin/
