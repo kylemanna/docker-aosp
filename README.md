@@ -72,6 +72,15 @@ The `aosp` wrapper doesn't work well with setting up environments, but with
 some bash magic, this can be side stepped with short little scripts.  See
 `tests/build-nougat.sh` for an example of a complete fetch and build of AOSP.
 
+Issues
+------
+
+There are some known issues with using Docker Toolbox on macOS and current
+virtualization technologies resulting in unusual user ID assignments and very
+poor performing virtualization file sharing implementations with things like
+VirtualBox.  It's recommended to run this image completely in a virtual machine
+with enough space to fit the entire build (80GB+) as opposed to mapping the
+build to the local macOS file system via VirtualBox or similar.
 
 Tested
 ------
