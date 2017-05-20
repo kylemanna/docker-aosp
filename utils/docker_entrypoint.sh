@@ -46,3 +46,4 @@ fi
 # Execute command as `aosp` user
 export HOME=/home/aosp
 exec sudo -E -u aosp $args
+export USER=$(id -un)
