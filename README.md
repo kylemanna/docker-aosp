@@ -72,6 +72,23 @@ The `aosp` wrapper doesn't work well with setting up environments, but with
 some bash magic, this can be side stepped with short little scripts.  See
 `tests/build-nougat.sh` for an example of a complete fetch and build of AOSP.
 
+[Docker Compose][]
+------
+
+A [Docker Compose][] file is provided in the root of this repository, you can tweak it as need be:
+
+```yaml
+version: "2"
+
+services:
+  aosp:
+    image: kylemanna/aosp:latest
+    volumes:
+      - /tmp/ccache:/ccache
+      - ~/aosp:/aosp
+```
+Example run: `docker-compose run --rm aosp repo sync -j4` -- your android build directory will be in `~/aosp`.
+
 Issues
 ------
 
@@ -89,3 +106,5 @@ Tested
 * Android Lollipop `android-5.0.2_r1`
 * Android Marshmallow `android-6.0.1_r79`
 * Android Nougat `android-7.0.0_r14`
+
+[Docker Compose]: https://docs.docker.com/compose
