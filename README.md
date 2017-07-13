@@ -46,10 +46,10 @@ For the terribly impatient.
     5. In parallel you are expected to be drinking because I save you some time.
 
 
-    mkdir kitkat ; cd kitkat
+    mkdir marshmallow ; cd marshmallow
     export AOSP_VOL=$PWD
-    curl -O https://raw.githubusercontent.com/kylemanna/docker-aosp/master/tests/build-kitkat.sh
-    bash ./build-kitkat.sh
+    curl -O https://raw.githubusercontent.com/kylemanna/docker-aosp/master/tests/build-marshmallow.sh
+    bash ./build-marshmallow.sh
 
 How it Works
 ------------
@@ -70,12 +70,41 @@ Docker container.  For example to run `repo sync` in the Docker container:
 
 The `aosp` wrapper doesn't work well with setting up environments, but with
 some bash magic, this can be side stepped with short little scripts.  See
-`tests/build-kitkat.sh` for an example of a complete fetch and build of AOSP.
+`tests/build-marshmallow.sh` for an example of a complete fetch and build of AOSP.
 
+[Docker Compose][]
+------
+
+A [Docker Compose][] file is provided in the root of this repository, you can tweak it as need be:
+
+```yaml
+version: "2"
+
+services:
+  aosp:
+    image: kylemanna/aosp:6.0-marshmallow
+    volumes:
+      - /tmp/ccache:/ccache
+      - ~/aosp:/aosp
+```
+Example run: `docker-compose run --rm aosp repo sync -j4` -- your android build directory will be in `~/aosp`.
+
+Issues
+------
+
+There are some known issues with using Docker Toolbox on macOS and current
+virtualization technologies resulting in unusual user ID assignments and very
+poor performing virtualization file sharing implementations with things like
+VirtualBox.  It's recommended to run this image completely in a virtual machine
+with enough space to fit the entire build (80GB+) as opposed to mapping the
+build to the local macOS file system via VirtualBox or similar.
 
 Tested
 ------
 
-* Android Kitkat `android-4.4.4_r2.0.1`
+* Android KitKat `android-4.4.4_r2.0.1`
 * Android Lollipop `android-5.0.2_r1`
-* Android Marshmallow `android-6.0.1_r72`
+* Android Marshmallow `android-6.0.1_r80`
+* Android Nougat `android-7.0.0_r14`
+
+[Docker Compose]: https://docs.docker.com/compose

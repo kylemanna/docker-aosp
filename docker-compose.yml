@@ -1,0 +1,9 @@
+version: "2"
+
+services:
+  aosp:
+    image: kylemanna/aosp:6.0-marshmallow
+    volumes:
+      - /tmp/ccache:/ccache
+      - ~/aosp:/aosp
+      - ~/.gitconfig:/root/.gitconfig
