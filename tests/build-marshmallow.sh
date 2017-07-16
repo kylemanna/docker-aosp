@@ -9,7 +9,7 @@
 set -ex
 
 if [ "$1" = "docker" ]; then
-    TEST_BRANCH=${TEST_BRANCH:-android-6.0.1_r72}
+    TEST_BRANCH=${TEST_BRANCH:-android-6.0.1_r80}
     TEST_URL=${TEST_URL:-https://android.googlesource.com/platform/manifest}
 
     cpus=$(grep ^processor /proc/cpuinfo | wc -l)
