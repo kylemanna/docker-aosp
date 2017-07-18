@@ -60,7 +60,8 @@ on the main Ubuntu base image.
 The `aosp` wrapper is a simple wrapper to simplify invocation of the Docker
 image.  The wrapper ensures that a volume mount is accessible and has valid
 permissions for the `aosp` user in the Docker image (this unfortunately
-requires sudo).  It also forwards an ssh-agent in to the Docker container
+requires sudo, or for you to be in `docker` group.).
+It also forwards an ssh-agent in to the Docker container
 so that private git repositories can be accessed if needed.
 
 The intention is to use `aosp` to prefix all commands one would run in the
@@ -82,10 +83,17 @@ version: "2"
 
 services:
   aosp:
+    build: . # comment out to use docker hub image -- otherwise an image will be built locally with the same name as the docker hub version
     image: kylemanna/aosp:6.0-marshmallow
+    container_name: aosp
     volumes:
-      - /tmp/ccache:/ccache
+      - ~/aosp/ccache:/tmp/ccache
       - ~/aosp:/aosp
+      - ~/.gitconfig:/home/aosp/.gitconfig
+      - ~/.ssh:/home/aosp/.ssh
+      - $SSH_AUTH_SOCK:/tmp/ssh_auth
+    environment:
+      - SSH_AUTH_SOCK=/tmp/ssh_auth
 ```
 Example run: `docker-compose run --rm aosp repo sync -j4` -- your android build directory will be in `~/aosp`.
 
