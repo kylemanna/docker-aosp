@@ -2,8 +2,14 @@ version: "2"
 
 services:
   aosp:
+    build: . # comment out to use docker hub image -- otherwise an image will be built locally with the same name as the docker hub version
     image: kylemanna/aosp:6.0-marshmallow
     volumes:
       - ~/aosp/ccache:/tmp/ccache
       - ~/aosp:/aosp
-      - ~/.gitconfig:/root/.gitconfig
+      - ~/.gitconfig:/home/aosp/.gitconfig
+      - ~/.ssh:/home/aosp/.ssh
+      - $SSH_AUTH_SOCK:/tmp/ssh_auth
+    environment:
+      - SSH_AUTH_SOCK=/tmp/ssh_auth
+      - USER=aosp
