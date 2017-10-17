@@ -9,7 +9,7 @@ set -e
 
 # Override from environment
 
-AOSP_IMAGE=${AOSP_IMAGE:-kylemanna/aosp}
+AOSP_IMAGE=${AOSP_IMAGE:-kylemanna/aosp:4.4-kitkat}
 AOSP_ARGS=${AOSP_ARGS:---rm -it}
 
 AOSP_VOL=${AOSP_VOL:-~/aosp-root}
