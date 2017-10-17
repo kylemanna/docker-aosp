@@ -1,0 +1,9 @@
+version: "2"
+
+services:
+  aosp:
+    image: kylemanna/aosp:latest
+    volumes:
+      - ~/aosp/ccache:/tmp/ccache
+      - ~/aosp:/aosp
+      - ~/.gitconfig:/root/.gitconfig

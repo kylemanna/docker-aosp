@@ -8,21 +8,48 @@
 set -e
 
 # Override from environment
-AOSP_IMAGE=${AOSP_IMAGE:-kylemanna/aosp}
-AOSP_VOL=${AOSP_VOL:-/vol0}
-AOSP_ARGS=${AOSP_ARGS:---rm -it}
-AOSP_VOL_AOSP=${AOSP_VOL_AOSP:-$AOSP_VOL/aosp}
-AOSP_VOL_CCACHE=${AOSP_VOL_CCACHE:-$AOSP_VOL/ccache}
 
-if [ ! -d "$AOSP_VOL_AOSP" -o ! -d "$AOSP_VOL_CCACHE" ]; then
-    sudo mkdir -p $AOSP_VOL_AOSP $AOSP_VOL_CCACHE
-    sudo chmod 777 $AOSP_VOL_AOSP $AOSP_VOL_CCACHE
+AOSP_IMAGE=${AOSP_IMAGE:-kylemanna/aosp:4.4-kitkat}
+AOSP_ARGS=${AOSP_ARGS:---rm -it}
+
+AOSP_VOL=${AOSP_VOL:-~/aosp-root}
+AOSP_VOL=${AOSP_VOL%/} # Trim trailing slash if needed
+AOSP_VOL_AOSP=${AOSP_VOL_AOSP:-$AOSP_VOL/aosp}
+AOSP_VOL_AOSP=${AOSP_VOL_AOSP%/} # Trim trailing slash if needed
+AOSP_VOL_CCACHE=${AOSP_VOL_CCACHE:-$AOSP_VOL/ccache}
+AOSP_VOL_CCACHE=${AOSP_VOL_CCACHE%/} # Trim trailing slash if needed
+
+# Convenience function
+function aosp_create_dir_if_needed {
+  directory=$1
+  msg="aosp: Checking if $directory exists"
+  echo "$msg"
+  if [ ! -d "$directory" ]; then
+    echo "$msg - unexistent"
+    msg="Creating $directory"
+    echo "$msg"
+    mkdir -p $directory
+  fi
+  echo "$msg - ok"
+}
+
+# Create AOSP_VOL_AOSP
+aosp_create_dir_if_needed $AOSP_VOL_AOSP
+aosp_create_dir_if_needed $AOSP_VOL_CCACHE
+
+uid=$(id -u)
+
+# Set uid and gid to match host current user as long as NOT root
+if [ $uid -ne "0" ]; then
+    AOSP_HOST_ID_ARGS="-e USER_ID=$uid -e GROUP_ID=$(id -g)"
 fi
 
-if [ -n "$SSH_AUTH_SOCK" ]; then
+if [ -S "$SSH_AUTH_SOCK" ]; then
     SSH_AUTH_ARGS="-v $SSH_AUTH_SOCK:/tmp/ssh_auth -e SSH_AUTH_SOCK=/tmp/ssh_auth"
 fi
 
-docker run $AOSP_ARGS $SSH_AUTH_ARGS $AOSP_EXTRA_ARGS \
+echo ""
+
+docker run $AOSP_ARGS $AOSP_HOST_ID_ARGS $SSH_AUTH_ARGS $AOSP_EXTRA_ARGS \
     -v "$AOSP_VOL_AOSP:/aosp" -v "$AOSP_VOL_CCACHE:/tmp/ccache" \
     $AOSP_IMAGE $@
