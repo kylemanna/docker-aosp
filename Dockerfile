@@ -5,6 +5,12 @@ FROM ubuntu:14.04
 
 MAINTAINER Kyle Manna <kyle@kylemanna.com>
 
+# Setup for Java
+RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
+        >> /etc/apt/sources.list.d/webupd8.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886 && \
+    echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+
 # /bin/sh points to Dash by default, reconfigure to use bash until Android
 # build becomes POSIX compliant
 RUN echo "dash dash/sh boolean false" | debconf-set-selections && \
@@ -16,7 +22,7 @@ RUN apt-get update && \
         flex g++-multilib gcc-multilib git gnupg gperf lib32ncurses5-dev \
         lib32readline-gplv2-dev lib32z1-dev libesd0-dev libncurses5-dev \
         libsdl1.2-dev libwxgtk2.8-dev libxml2-utils lzop \
-        openjdk-7-jdk \
+        oracle-java6-installer oracle-java6-set-default \
         pngcrush schedtool xsltproc zip zlib1g-dev graphviz && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
