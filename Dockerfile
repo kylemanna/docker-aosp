@@ -11,6 +11,13 @@ RUN echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EEA14886 && \
     echo oracle-java6-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
 
+# http://www.webupd8.org/2012/11/oracle-sun-java-6-installer-available.html
+# Java 6 is no longer supported by Oracle. The binaries are no longer available for download, but if you have an Oracle account, you can still download it after logging in.
+#  The Oracle Java 6 installer in this article will continue to work only if you manually download Oracle JDK 6 (version 6u45), place it in the /var/cache/oracle-jdk6-installer/ folder on your computer, then install "oracle-java6-installer" as explained below in this article.
+# http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase6-419409.html
+# http://download.oracle.com/otn/java/jdk/6u45-b06/jdk-6u45-linux-x64.bin
+COPY utils/jdk-6u45-linux-x64.bin /var/cache/oracle-jdk6-installer/
+
 # /bin/sh points to Dash by default, reconfigure to use bash until Android
 # build becomes POSIX compliant
 RUN echo "dash dash/sh boolean false" | debconf-set-selections && \
