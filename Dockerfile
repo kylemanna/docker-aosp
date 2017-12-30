@@ -12,6 +12,7 @@ RUN echo "dash dash/sh boolean false" | debconf-set-selections && \
 
 # Keep the dependency list as short as reasonable
 RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive \ 
     apt-get install -y bc bison bsdmainutils build-essential curl \
         flex g++-multilib gcc-multilib git gnupg gperf lib32ncurses5-dev \
         lib32readline-gplv2-dev lib32z1-dev libesd0-dev libncurses5-dev \
